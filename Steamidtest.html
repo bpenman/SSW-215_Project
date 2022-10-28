@@ -1,0 +1,18 @@
+<html>
+<h1>Entire json</h1>
+<p id="Entire"> </p>
+<label for="steamid"> Enter Steam ID:</label>
+<br>
+<input type= "text" id="steamid" name = "steamid">
+<script>
+let id = document.getElementById("steamid").value
+const link = "https://steamcommunity.com/profiles/"+id+"/inventory/json/730/2"
+fetch(link)
+	.then((response) => {
+return response.json();
+})
+.then((values) => {
+let Entirety = values;
+});
+<script>
+</html>
