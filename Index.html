@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+    <meta charset="utf-8">
+    <title>CS:GO Inventory Rater!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Counter Strike : Global Offesnsive <br> Inventory Rater</h1>
+    
+    <!-- This Div should be hidden after calculating -->
+    <div id="input_field">
+        <input id="steam_id" type="text" placeholder="Steam-ID"><br>
+        <span>To find your Steam-ID: go to "account details" in the application and look at the top left of the window, make sure to set your inventory to public</span><br>
+        <input id="id_submit" type="submit" value="Calculate" onclick="start()">
+    </div>
+    
+    <!-- this div will be hidden and needs to be revealed with JS -->
+    <div id=score_display>
+        <p>Your Inventory Score Is:</p>
+        <h2 id="score"></h2>
+    </div>
+    
+    <div id="list_of_skins">
+        <h3>Your Top Skins:</h3>
+        <!-- This list needs to be populated by JS and by default this div is invisible until it is populated, so JS has to be made to reveal it -->
+        <ol id="top_skins_list">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+    
+</body>  
+</HTML>
