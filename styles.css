@@ -1,14 +1,98 @@
 body{
+    display:block;
     text-align: center;
-    background-color: #1B2238;
-    color: #7BE18C;
-    font-family:
+    background-color: #263142;
+    color: #8CFF9F;
+    font-family: Verdana, sans-serif;
+    width:85%;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 h3{
-    color: #F5D884;
+    color: #FFE28A;
+    font-size: 20pt;
+    font-weight:bold;
+}
+
+#score{
+    display:block;
+    font-size: 36pt;
 }
 
 h1{
-    color: #7EFAFC;
+    color: #A5FDFF;
+    font-size: 36pt;
+    font-weight:bold;
+    text-shadow: 6px 6px 2px #27272B;
+}
+
+p {
+    font-size 16pt;
+    
+}
+
+.boxed{
+    margin:1em;
+    padding:1em;
+    background-color:#2D3A4F;
+    border-color:#2D3A4F;
+    border-radius:1em;
+    box-shadow: 2px 2px 0px #27272B;
+}
+
+#list_of_skins{
+    display:inline-block;
+    width:30%;
+    float:left;
+}
+
+#list_of_skins h3{
+    text-decoration: underline;
+}
+
+#input_field{
+    display:block;
+    width:75%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.box_w_expla{
+    display:block;
+    margin:.5em;
+    margin-left:auto;
+    margin-right:auto;
+    width:80%;
+    padding: .5em;
+}
+
+#steam_id{
+    display:block;
+    margin-top:.5em;
+    margin-left:auto;
+    margin-right:auto;
+    width: 95%;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    font-size: 26pt;
+    background-color:#1D2533;
+    color:whitesmoke;
+}
+
+span{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    width:100%;
+    color:darkgray;
+    font-size:10pt;
+    margin-top:2px;
+}
+
+#id_submit{
+    margin-top: 2em;
+    width: 22em;
+    padding:1.5em;
+    
 }
