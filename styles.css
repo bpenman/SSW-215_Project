@@ -11,7 +11,7 @@ body{
 
 h3{
     color: #FFE28A;
-    font-size: 20pt;
+    font-size: 26pt;
     font-weight:bold;
 }
 
@@ -38,12 +38,12 @@ p {
     background-color:#2D3A4F;
     border-color:#2D3A4F;
     border-radius:1em;
-    box-shadow: 2px 2px 0px #27272B;
+    box-shadow: 2px 2px 0px #27272B, -20px -10px 50px #263142 inset;
 }
 
 #list_of_skins{
     display:inline-block;
-    width:30%;
+    width:45%;
     float:left;
 }
 
@@ -84,7 +84,7 @@ span{
     display:block;
     margin-left:auto;
     margin-right:auto;
-    width:100%;
+    width:90%;
     color:darkgray;
     font-size:10pt;
     margin-top:2px;
@@ -92,7 +92,38 @@ span{
 
 #id_submit{
     margin-top: 2em;
-    width: 22em;
-    padding:1.5em;
+    width: 60%;
+    padding:1em;
+    background-color: #415373;
+    border:none;
+    font-size: 24pt;
+    color: #8CFF9F;
+    font-weight:bold;
+    box-shadow: 2px 2px 0px #27272B, -5px -2px 10px #263142 inset;
+}
+
+#id_submit:hover{
+    background-color:#1D2533;
+    color:#64B571;
+    box-shadow: 2px 2px 0px #27272B inset, 3px 3px 20px #263142 inset;
+}
+
+li{
+    font-size: 20pt;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+::-webkit-scrollbar{
+    width: .5em;
     
 }
+
+::-webkit-scrollbar-track{
+    background-color:#1D2533;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color:#2D3A4F;
+}
+
