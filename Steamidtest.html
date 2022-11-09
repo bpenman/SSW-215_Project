@@ -1,18 +1,44 @@
 <html>
 <h1>Entire json</h1>
 <p id="Entire"> </p>
-<label for="steamid"> Enter Steam ID:</label>
+<form>
+<label for="sid"> Enter Steam ID:</label>
 <br>
-<input type= "text" id="steamid" name = "steamid">
+<input type= "text" id="steamid" name = "stid">
+<button type = "button" onclick = "find()">Fetch Json</button>
+</form>
+<p id = "Deez"></p>
+
 <script>
-let id = document.getElementById("steamid").value
-const link = "https://steamcommunity.com/profiles/"+id+"/inventory/json/730/2"
-fetch(link)
-	.then((response) => {
-return response.json();
-})
-.then((values) => {
-let Entirety = values;
-});
-<script>
+function loadJSON(path, success, error) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        success(JSON.parse(xhr.responseText));
+      }
+      else {
+        error(xhr);
+      }
+    }
+  };
+  xhr.open('GET', path, true);
+  xhr.send();
+}
+
+function parse(Data){
+console.log(Data[0]);
+
+}
+function find()
+{
+let id = document.getElementById("steamid").value;
+const link = "https://steamcommunity.com/profiles/"+id+"/inventory/json/730/2";
+//document.getElementById("Deez").innerHTML = ("FILE: " + link);
+//Key 8B98BC96CE5347DC959AD0207D92C4DD
+//personal Steam ID 76561198301167277
+//test link? http://api.steampowered.com/IEconItems_730/GetPlayerItems/v0001/?key={api_key}&SteamID={steam_id64}
+loadJSON(link, parse);
+}
+</script>
 </html>
