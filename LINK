@@ -1,0 +1,74 @@
+function populateSteamInventory() {
+    // populate the select_items panel with Steam inventory
+
+    var api_key = $('#apiKey').text();
+    var appid = $('#appId').text();
+
+    noty({text: "Loading Steam inventory...", type: "info"});
+
+    $.ajax({
+        url: '/api/v1/get_steam_inventory',
+        type: 'post',
+        data: {
+            api_key: api_key,
+	    appid: appid
+        },
+        dataType: 'json',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))}
+    })
+        .done(function( data, textStatus, jqXHR ) {
+
+            if (textStatus === 'success') {
+
+		$('#select_items').empty();
+
+		var items = data.data.items;
+
+		if (items.length == 0) {
+		    $('#select_items').append('<p><strong>No tradable items found in your Steam inventory, or it is not public.</strong></p>');
+		    noty({text: "Steam inventory loaded. No tradable items found.", type: "error"});
+		} else {
+
+		    noty({text: "Steam inventory loaded.", type: "success"});
+
+		    for (var i = 0; i < items.length; i++) {
+			// add each item to the select_items panel
+
+			addToSelectItems(items[i]);
+
+		    }
+
+		    bindClickToSelectItems();
+		    bindClassChangesToListingBar();
+		    bindMouseoverToOverlayForSelectItems();
+
+		    $('.poptip').tooltip();
+
+		    if ($('#default_pricing_mode').length) {
+			$('#' + $('#default_pricing_mode').text()).click();
+		    } else {
+			$('#custom_prices').click();
+		    }
+
+		}
+
+            }
+
+	})
+        .fail(function( jqXHR, textStatus, errorThrown ) {
+            // fail silently
+
+	    $('#select_items').append('<p>Retrieving Steam inventory failed.</p>');
+
+	    try {
+		var responseText = JSON.parse(jqXHR.responseText);
+		noty({text: responseText.data.error_message, type: 'error'});
+	    } catch (err) {
+		noty({text: "Got Response Status: " + textStatus + " ("+ jqXHR.status +").", type: 'error'});
+	    }
+
+	    noty({text: "Steam inventory could not be retrieved. Please make sure your Steam inventory is public, and try again.", type: 'warning'});
+
+        })
+
+}
