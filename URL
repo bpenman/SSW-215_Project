@@ -1,1 +1,5 @@
 http://api.steampowered.com/IEconItems_730/GetPlayerItems/v0001/?key={api_key}&SteamID={steam_id64}
+
+
+
+http://api.steampowered.com/IEconItems_730/GetPlayerItems/v0001/?key=AAAAAA&steamid=AAAAAAA
