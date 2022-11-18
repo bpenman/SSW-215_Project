@@ -16,14 +16,27 @@
         </div>
         <input id="id_submit" type="submit" value="Get Inventory" onclick="insert_link()">
         <!--this button calls the insert_link() function where the contents of the ID field will be collected and insterted into the link structure. The JS will then redirect the user to a NEW TAB IN THE BROWSER with the json-->
-        
+         <script>
+            function insert_link() {
+            let id = document.getElementById("steam_id").value;
+            window.open(
+            "https://steamcommunity.com/profiles/"+id+"/inventory/json/730/2", "_blank");
+            }
+        </script>
         <p>After clicking this button, right click the new page and hit 'save as'.<br>Save the File as a JSON and submit it below:</p>
         
         <input type="file" id="inventory_json" accept=".json" name="inventory">
         
         <input type="submit" id="calculate_score" value="Calculate!" onclick="calculate()">
         <!-- This function takes the file in the previous field, parses it, then runs point calculations. at the end of this process, all of the HTML elements marked for revealing will be revealed, this entire DIV 'id = input field will be hidden, and the elements whose content needs to be populated will be populated-->
-        
+        <script>
+            function calculate(){
+                const inventory = JSON.parse(getElementById("inventory_json"));
+                console.log(getValues(inventory, "market_name"))
+                //More code needs to be added to calculate a score but this creates an array of the names of each item
+                //Same thing can be done with other keys and values
+            }
+        </script>
     </div>
     
     <!-- this div will be hidden and needs to be revealed with JS -->
