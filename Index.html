@@ -14,7 +14,16 @@
             <input id="steam_id" type="text" placeholder="Steam-ID">
             <span>To find your Steam-ID: go to "account details" in the application and look at the top left of the window, make sure to set your inventory to public</span>
         </div>
-        <input id="id_submit" type="submit" value="Calculate" onclick="start()">
+        <input id="id_submit" type="submit" value="Get Inventory" onclick="insert_link()">
+        <!--this button calls the insert_link() function where the contents of the ID field will be collected and insterted into the link structure. The JS will then redirect the user to a NEW TAB IN THE BROWSER with the json-->
+        
+        <p>After clicking this button, right click the new page and hit 'save as'.<br>Save the File as a JSON and submit it below:</p>
+        
+        <input type="file" id="inventory_json" accept=".json" name="inventory">
+        
+        <input type="submit" id="calculate_score" value="Calculate!" onclick="calculate()">
+        <!-- This function takes the file in the previous field, parses it, then runs point calculations. at the end of this process, all of the HTML elements marked for revealing will be revealed, this entire DIV 'id = input field will be hidden, and the elements whose content needs to be populated will be populated-->
+        
     </div>
     
     <!-- this div will be hidden and needs to be revealed with JS -->

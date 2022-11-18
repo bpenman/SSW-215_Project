@@ -90,7 +90,7 @@ span{
     margin-top:2px;
 }
 
-#id_submit{
+input[type="submit"]{
     margin-top: 2em;
     width: 60%;
     padding:1em;
@@ -102,7 +102,7 @@ span{
     box-shadow: 2px 2px 0px #27272B, -5px -2px 10px #263142 inset;
 }
 
-#id_submit:hover{
+input[type="submit"]:hover{
     background-color:#1D2533;
     color:#64B571;
     box-shadow: 2px 2px 0px #27272B inset, 3px 3px 20px #263142 inset;
@@ -127,3 +127,21 @@ li{
     background-color:#2D3A4F;
 }
 
+#inventory_json {
+    margin-top: 2em;
+    width: 60%;
+    padding:1em;
+    background-color: #415373;
+    border:none;
+    font-size: 18pt;
+    color: #8CFF9F;
+    font-weight:bold;
+    box-shadow: 2px 2px 0px #27272B, -5px -2px 10px #263142 inset;
+    margin-bottom:10%;
+}
+
+#inventory_json:hover{
+    background-color:#1D2533;
+    color:#64B571;
+    box-shadow: 2px 2px 0px #27272B inset, 3px 3px 20px #263142 inset;
+}
