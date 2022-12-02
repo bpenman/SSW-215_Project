@@ -30,6 +30,18 @@
         <input type="submit" id="calculate_score" value="Calculate!" onclick="calculate()">
         <!-- This function takes the file in the previous field, parses it, then runs point calculations. at the end of this process, all of the HTML elements marked for revealing will be revealed, this entire DIV 'id = input field will be hidden, and the elements whose content needs to be populated will be populated-->
         <script>
+              function getValues(obj, key) {
+    var objects = [];
+    for (var i in obj) {
+        if (!obj.hasOwnProperty(i)) continue;
+        if (typeof obj[i] == 'object') {
+            objects = objects.concat(getValues(obj[i], key));
+        } else if (i == key) {
+            objects.push(obj[i]);
+        }
+    }
+    return objects;
+}
             function calculate(){
                 const inventory = JSON.parse(getElementById("inventory_json"));
                 console.log(getValues(inventory, "market_name"))
