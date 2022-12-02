@@ -1,0 +1,150 @@
+ "2735398399_188530139":{
+         "appid":"730",
+         "classid":"2735398399",
+         "instanceid":"188530139",
+         "icon_url":"-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou7uifDhhwszFcDoV08-hlYfcqPrxN7LEmyUEv5Ip27mUoo6s2Azm-0A6am33JobBcQ83ZFqF-Ae5wb2605W4u5XP1zI97U9qgGzh",
+         "icon_url_large":"-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou7uifDhhwszFcDoV08-hlYfcqPrxN7LEm1Rd6dd2j6eUotut2QTh_BFlY2HxJIXDewI6Y1iE-Vi3xOy6h8C7vM6cn3FnvSgk-z-DyOnwzweB",
+         "icon_drag_url":"",
+         "name":"MAG-7 | SWAG-7",
+         "market_hash_name":"MAG-7 | SWAG-7 (Field-Tested)",
+         "market_name":"MAG-7 | SWAG-7 (Field-Tested)",
+         "name_color":"D2D2D2",
+         "background_color":"",
+         "type":"Restricted Shotgun",
+         "tradable":1,
+         "marketable":1,
+         "commodity":0,
+         "market_tradable_restriction":"7",
+         "descriptions":[
+            {
+               "type":"html",
+               "value":"Exterior: Field-Tested"
+            },
+            {
+               "type":"html",
+               "value":" "
+            },
+            {
+               "type":"html",
+               "value":"The CT-exclusive Mag-7 delivers a devastating amount of damage at close range. Its rapid magazine-style reloads make it a great tactical choice. It has been covered in monochromatic silver and black designs.\n\n<i>You either have it or you don't<\/i>"
+            },
+            {
+               "type":"html",
+               "value":" "
+            },
+            {
+               "type":"html",
+               "value":"The Clutch Collection",
+               "color":"9da1a9",
+               "app_data":{
+                  "def_index":"65535",
+                  "is_itemset_name":1
+               }
+            },
+            {
+               "type":"html",
+               "value":" "
+            }
+         ],
+         "owner_descriptions":"",
+         "actions":[
+            {
+               "name":"Inspect in Game...",
+               "link":"steam:\/\/rungame\/730\/76561202255233023\/+csgo_econ_action_preview%20S%owner_steamid%A%assetid%D16315039555336788635"
+            }
+         ],
+         "market_actions":[
+            {
+               "name":"Inspect in Game...",
+               "link":"steam:\/\/rungame\/730\/76561202255233023\/+csgo_econ_action_preview%20M%listingid%A%assetid%D16315039555336788635"
+            }
+         ],
+         "tags":[
+            {
+               "internal_name":"CSGO_Type_Shotgun",
+               "name":"Shotgun",
+               "category":"Type",
+               "category_name":"Type"
+            },
+            {
+               "internal_name":"weapon_mag7",
+               "name":"MAG-7",
+               "category":"Weapon",
+               "category_name":"Weapon"
+            },
+            {
+               "internal_name":"set_community_19",
+               "name":"The Clutch Collection",
+               "category":"ItemSet",
+               "category_name":"Collection"
+            },
+            {
+               "internal_name":"normal",
+               "name":"Normal",
+               "category":"Quality",
+               "category_name":"Category"
+            },
+            {
+               "internal_name":"Rarity_Mythical_Weapon",
+               "name":"Restricted",
+               "category":"Rarity",
+               "color":"8847ff",
+               "category_name":"Quality"
+            },
+            {
+               "internal_name":"WearCategory2",
+               "name":"Field-Tested",
+               "category":"Exterior",
+               "category_name":"Exterior"
+            }
+
+"1989284940_302028390":{
+         "appid":"730",
+         "classid":"1989284940",
+         "instanceid":"302028390",
+         "icon_url":"IzMF03bi9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdB2ozio1RrlIWFK3UfvMYB8UsvjiMXojflsZalyxSh31CIyHz2GZ-KuFpPsrTzBG0su2fDm25bWCWeXKPT1sxTLBaYDrb-GX2t7_BQ2rOFbotEVhXLKoCpzBJNciBOQx9itAdqGq0mFZwCxo8e9VKaVK6zyxAYrmmEJ_lng",
+         "icon_url_large":"IzMF03bi9WpSBq-S-ekoE33L-iLqGFHVaU25ZzQNQcXdB2ozio1RrlIWFK3UfvMYB8UsvjiMXojflsZalyxSh31CIyHz2GZ-KuFpPsrTzBG0su2fDm3IZDbWKCSXSQ5sTLRXYzzd_mGnt-vGFjGYR7okEV9RL6VWp2RAaMuNPUdrh4MPqSuomUM7HRkkfddLZQOvw2QfKOAkzXlBds848X_4GA",
+         "icon_drag_url":"",
+         "name":"Sealed Graffiti | Sorry (Desert Amber)",
+         "market_hash_name":"Sealed Graffiti | Sorry (Desert Amber)",
+         "market_name":"Sealed Graffiti | Sorry (Desert Amber)",
+         "name_color":"D2D2D2",
+         "background_color":"",
+         "type":"Base Grade Graffiti",
+         "tradable":1,
+         "marketable":1,
+         "commodity":1,
+         "market_tradable_restriction":"7",
+         "descriptions":[
+            {
+               "type":"html",
+               "value":"This is a sealed container of a graffiti pattern. Once this graffiti pattern is unsealed, it will provide you with enough charges to apply the graffiti pattern <b>50<\/b> times to the in-game world."
+            },
+            {
+               "type":"html",
+               "value":" "
+            },
+            {
+               "type":"html",
+               "value":"",
+               "color":"00a000",
+               "app_data":{
+                  "limited":1
+               }
+            }
+         ],
+         "owner_descriptions":"",
+         "actions":[
+            {
+               "name":"Inspect in Game...",
+               "link":"steam:\/\/rungame\/730\/76561202255233023\/+csgo_econ_action_preview%20S%owner_steamid%A%assetid%D9704176992972499948"
+            }
+         ],
+         "market_actions":[
+            {
+               "name":"Inspect in Game...",
+               "link":"steam:\/\/rungame\/730\/76561202255233023\/+csgo_econ_action_preview%20M%listingid%A%assetid%D9704176992972499948"
+            }
+         ],
+         ]
+      },
