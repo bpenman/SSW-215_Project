@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+    <meta charset="utf-8">
+    <title>CS:GO Inventory Rater!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Counter Strike : Global Offensive <br> Inventory Rater</h1>
+    
+    <!-- This Div should be hidden after calculating -->
+    <div id="input_field" class="boxed">
+        <div id="box_w_expla">
+            <input id="steam_id" type="text" placeholder="Steam-ID">
+            <span>To find your Steam-ID: go to "account details" in the application and look at the top left of the window, make sure to set your inventory to public</span>
+        </div>
+        <input id="id_submit" type="submit" value="Get Inventory" onclick="insert_link()">
+        <!--this button calls the insert_link() function where the contents of the ID field will be collected and insterted into the link structure. The JS will then redirect the user to a NEW TAB IN THE BROWSER with the json-->
+         <script>
+            function insert_link() {
+            let id = document.getElementById("steam_id").value;
+            window.open(
+            "https://steamcommunity.com/profiles/"+id+"/inventory/json/730/2", "_blank");
+            }
+        </script>
+        <p>After clicking this button, right click the new page and hit 'save as'.<br>Save the File as a JSON and submit it below:</p>
+        
+        <input type="file" id="inventory_json" accept=".json" name="inventory">
+        
+        <input type="submit" id="calculate_score" value="Calculate!" onclick="parse_json()">
+        <!-- This function takes the file in the previous field, parses it, then runs point calculations. at the end of this process, all of the HTML elements marked for revealing will be revealed, this entire DIV 'id = input field will be hidden, and the elements whose content needs to be populated will be populated-->
+        <script>
+            
+            
+            
+            function parse_json(){
+                let reader = new FileReader();
+                
+                reader.onload = calculate;
+                
+                reader.readAsText(document.getElementById("inventory_json").files[0]);
+            }
+            
+            //this function gets called when reader is done loading since it is an asynchronus method
+            function calculate (event){
+                str = event.target.result;
+                Inventory = JSON.parse(str);
+                console.log(Inventory)
+                
+                //Nick, continue YOUR CODE HERE
+                    //This is were you will eventually make call to get_price
+            }
+            
+            //example call -> get_price( object.rgDescription.##########.market_hash_name) ----> returns median price on market
+            function get_price(hash_name){
+                
+                //Example Link:  http://steamcommunity.com/market/priceoverview/?currency=1&appid=730&market_hash_name=StatTrak%E2%84%A2%20P250%20%7C%20Steel%20Disruption%20%28Factory%20New%29
+                
+                encoded_market_hash = encodeURI(hash_name);
+                
+                link = "http://steamcommunity.com/market/priceoverview/?currency=1&appid=730&market_hash_name=" + encoded_market_hash
+                console.log(link);
+                
+                median_price = 0
+                
+                return loadJSON(link, price_check,'jsonp')
+                
+            }
+            
+            function loadJSON(path, success, error) {
+              var xhr = new XMLHttpRequest();
+              xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                  if (xhr.status === 200) {
+                    return success(JSON.parse(xhr.responseText));
+                  }
+                  else {
+                    
+                  }
+                }
+              };
+              xhr.open('GET', path, true);
+              xhr.send();
+            }
+            
+            function price_check(Data){
+
+              median_price = Data.median_price;
+                console.log(median_price);
+                return median_price
+            }
+            
+        </script>
+    </div>
+    
+    <!-- this div will be hidden and needs to be revealed with JS -->
+    <div id=score_display>
+        <p>Your Inventory Score Is:</p>
+        <h2 id="score">999</h2>
+    </div>
+    
+    <div id="list_of_skins" class="boxed">
+        <h3>Your Top Skins:</h3>
+        <!-- This list needs to be populated by JS and by default this div is invisible until it is populated, so JS has to be made to reveal it -->
+        <ol id="top_skins_list">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+    
+    <div id="share">
+        <h2>Share</h2>
+    </div>
+    
+</body>  
+</HTML>
