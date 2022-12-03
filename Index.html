@@ -48,10 +48,69 @@
                 console.log(Inventory);
                 
                 //NICK CODE GO HERE, BELOW IS EXAMPLE OF SETTING SCORE AND INSERTING IT INTO THE TEXT THAT THE SHARE BUTTON WILL POSTa
+                //Inventory.rgDescriptions["2316436747_188530139"].(subclasses);
+              //Inventory.rgDescriptions[items[#]].(subclasses);
+                var items = Object.keys(Inventory.rgDescriptions)
+                score = 0
+               for(let n =0; n<items.length; n++){
+                if(Inventory.rgDescriptions[items[n]].tags[0].name == "Graffiti"){
+                    switch(Inventory.rgDescriptions[items[n]].tags[2].name){
+                        case "Exotic":{
+                            score += 10;
+                            break;
+                        }
+                        case "Remarkable":{
+                            score += 6;
+                            break;
+                        }
+                        case "High Grade":{
+                            score +=2;
+                            break;
+                        }
+                        case "Base Grade":{
+                            score +=1;
+                            break;
+                        }
+                        default: break;
+                    }
+                }
+                else if(Inventory.rgDescriptions[items[n]].tags[0].length<=3){ 
+                    break;
+                }
                 
+                else{
+                    switch(Inventory.rgDescriptions[items[n]].tags[5].name)
+                    {
+                    case "Factory New":{
+                        score +=10;
+                        break;
+                    }
+                    case "Minimal Wear":{
+                        score += 8;
+                        break;
+                    }
+                    case "Field-Tested":{
+                        score +=6;
+                        break;
+                    }
+                    case "Well-Worn":{
+                        score += 4;
+                        break;
+                    }
+                    case "Battle-Scarred":{
+                        score +=2;
+                        break;
+                    }
+                    default:
+                        score +=1;
+                        break;
+                    }
+                }
+                }
                 
-                score = 15065;//example score
-                document.getElementById("score").innerHTML = score;
+                    document.getElementById("score").innerHTML = score;
+                
+               //my code doesn't work yet because of line 82, for some reason it's using parts of the json that don't have 5 members of the tag key when I tried to sort those out.
                 
                 share_string = "My%20CS%3AGO%20inventory%20has%20a%20score%20of%20" + score + ".%20Compare%20yours%20at%20the%20link!"
                 
