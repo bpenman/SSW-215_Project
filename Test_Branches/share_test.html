@@ -51,45 +51,6 @@
                     //This is were you will eventually make call to get_price
             }
             
-            //example call -> get_price( object.rgDescription.##########.market_hash_name) ----> returns median price on market
-            function get_price(hash_name){
-                
-                //Example Link:  http://steamcommunity.com/market/priceoverview/?currency=1&appid=730&market_hash_name=StatTrak%E2%84%A2%20P250%20%7C%20Steel%20Disruption%20%28Factory%20New%29
-                
-                encoded_market_hash = encodeURI(hash_name);
-                
-                link = "http://steamcommunity.com/market/priceoverview/?currency=1&appid=730&market_hash_name=" + encoded_market_hash
-                console.log(link);
-                
-                median_price = 0
-                
-                return loadJSON(link, price_check,'jsonp')
-                
-            }
-            
-            function loadJSON(path, success, error) {
-              var xhr = new XMLHttpRequest();
-              xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                  if (xhr.status === 200) {
-                    return success(JSON.parse(xhr.responseText));
-                  }
-                  else {
-                    
-                  }
-                }
-              };
-              xhr.open('GET', path, true);
-              xhr.send();
-            }
-            
-            function price_check(Data){
-
-              median_price = Data.median_price;
-                console.log(median_price);
-                return median_price
-            }
-            
         </script>
     </div>
     
