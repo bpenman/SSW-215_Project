@@ -78,12 +78,12 @@
             }
             let Skins = [];
     for(let n = 0; n<items.length; n++){
-        if(Inventory.rgDescriptions[items[n]].tags[0].length==5){
-            Skins[n] = items[n];
+        if(Inventory.rgDescriptions[items[n]].tags.length==6){
+            Skins.push(items[n]);
         }
     }
     for(let n = 0; n<Skins.length; n++){
-                    switch(Inventory.rgDescriptions[items[n]].tags[5].name)
+                    switch(Inventory.rgDescriptions[Skins[n]].tags[5].name)
                     {
                     case "Factory New":{
                         score +=10;
