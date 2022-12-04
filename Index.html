@@ -74,11 +74,15 @@
                         default: break;
                     }
                 }
-                else if(Inventory.rgDescriptions[items[n]].tags[0].length<=3){ 
-                    break;
-                }
-                
-                else{
+               
+            }
+            let Skins = [];
+    for(let n = 0; n<items.length; n++){
+        if(Inventory.rgDescriptions[items[n]].tags[0].length==5){
+            Skins[n] = items[n];
+        }
+    }
+    for(let n = 0; n<Skins.length; n++){
                     switch(Inventory.rgDescriptions[items[n]].tags[5].name)
                     {
                     case "Factory New":{
@@ -105,13 +109,11 @@
                         score +=1;
                         break;
                     }
-                }
-                }
+    }
                 
                     document.getElementById("score").innerHTML = score;
                 
-               //my code doesn't work yet because of line 82, for some reason it's using parts of the json that don't have 5 members of the tag key when I tried to sort those out.
-                
+               
                 share_string = "My%20CS%3AGO%20inventory%20has%20a%20score%20of%20" + score + ".%20Compare%20yours%20at%20the%20link!"
                 
                 //https://twitter.com/intent/tweet/?text=My%20CS%3AGO%20inventory%20has%20a%20score%20of%20999.%20Compare%20yours%20at%20the%20link!&amp;url=https%3A%2F%2Fwww.csgoinventoryrater.com%2F
