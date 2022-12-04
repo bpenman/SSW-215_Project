@@ -83,6 +83,40 @@
         }
     }
     for(let n = 0; n<Skins.length; n++){
+         switch(Inventory.rgDescriptions[Skins[n]].tags[4].name){
+            case "Extraordinary":{
+                score +=1000;
+                break;
+            }
+            case "Contraband": {
+                score +=500;
+                break;
+            }
+            case "Covert":{
+                score += 100;
+                break;
+            }
+            case "Classified":{
+                score += 50;
+                break;
+            }
+            case "Restricted":{
+                score += 25;
+                break;
+            }
+            case "Mil-Spec":{
+                score += 10;
+                break;
+            }
+            case "Industrial Grade":{
+                score += 5;
+                break;
+            }
+            case "Consumer Grade":{
+                score +=1;
+                break;
+            }
+        }
                     switch(Inventory.rgDescriptions[Skins[n]].tags[5].name)
                     {
                     case "Factory New":{
