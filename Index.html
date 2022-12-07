@@ -133,7 +133,7 @@
     }
 
 function Weartype(n){
-                    switch(Inventory.descriptions[Skins[n]].tags[5].name)
+                    switch(Inventory.descriptions[Skins[n]].tags[5].localized_tag_name)
                     {
                     case "Factory New":{
                         score +=10;
@@ -201,17 +201,19 @@ function Weartype(n){
             text +="<li>"+best[y].name +"</li>";
            }
            document.getElementById("top_skins_list").innerHTML = text;
+           document.getElementById("list_of_skins").style.display = 'block';
+           document.getElementById("score_display").style.display = 'block';
         }
         </script>
     </div>
     
     <!-- this div will be hidden and needs to be revealed with JS -->
-    <div id=score_display>
+    <div id=score_display style= "display:none">
         <p>Your Inventory Score Is:</p>
         <h2 id="score"></h2>
     </div>
     
-    <div id="list_of_skins" class="boxed">
+    <div id="list_of_skins" class="boxed" style= "display:none">
         <h3>Your Top Skins:</h3>
         <!-- This list needs to be populated by JS and by default this div is invisible until it is populated, so JS has to be made to reveal it -->
         <ol id="top_skins_list">
