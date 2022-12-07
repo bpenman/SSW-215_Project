@@ -32,6 +32,23 @@
         <!-- This function takes the file in the previous field, parses it, then runs point calculations. at the end of this process.
             all of the HTML elements marked for revealing will be revealed, this entire DIV 'id = input field' will be hidden, and the elements whose content needs to be populated will be populated-->
         <script>
+            /*
+                added
+                    -if statement for knife before rarity switch statement. need to add another case for gloves
+                    -if statement in rarity check where the switch statement is copy-pasted but with a different position for the .tag[5] (for gun) goes to .tag[4] (for knife)
+                        ''need to add another case for glove
+                    -top skins list should be sorted by score of each skin. I would do it with an array like this
+                        skin_points = [];
+                        skin_points[skin number] = skin_points_after_calculating - skin_points_after_calculating
+                     gives array like this: 0: 0
+                                            1: 15
+  (these are not skins, point values=0)     2: 0
+                                            3: 0
+    (lets say this one is a fac new knife)  4: 310
+       (this is skin_number: point value)   5: 38
+            */
+            
+            
             //initialize a file reader then call the function associated with it (calculate()) when it is done loading. This is called being asynchronus
             function parse_json(){
                 let reader = new FileReader();
