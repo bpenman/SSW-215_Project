@@ -16,23 +16,23 @@
         </div>
         <input id="id_submit" type="submit" value="Get Inventory" onclick="insert_link()">
         <!--this button calls the insert_link() function where the contents of the ID field will be collected and insterted into the link structure. The JS will then redirect the user to a NEW TAB IN THE BROWSER with the json-->
+        
          <script>
             function insert_link() {
             let id = document.getElementById("steam_id").value;
-            window.open(
-            "https://steamcommunity.com/profiles/"+id+"/inventory/json/730/2", "_blank");
+            window.open("https://steamcommunity.com/inventory/"+id+"/730/2?l=english&count=5000", "_blank");
             }
         </script>
+        
         <p>After clicking this button, right click the new page and hit 'save as'.<br>Save the File as a JSON and submit it below:</p>
         
         <input type="file" id="inventory_json" accept=".json" name="inventory">
         
         <input type="submit" id="calculate_score" value="Calculate!" onclick="parse_json()">
-        <!-- This function takes the file in the previous field, parses it, then runs point calculations. at the end of this process, all of the HTML elements marked for revealing will be revealed, this entire DIV 'id = input field will be hidden, and the elements whose content needs to be populated will be populated-->
+        <!-- This function takes the file in the previous field, parses it, then runs point calculations. at the end of this process.
+            all of the HTML elements marked for revealing will be revealed, this entire DIV 'id = input field' will be hidden, and the elements whose content needs to be populated will be populated-->
         <script>
-            
-            
-            
+            //initialize a file reader then call the function associated with it (calculate()) when it is done loading. This is called being asynchronus
             function parse_json(){
                 let reader = new FileReader();
                 
@@ -41,62 +41,225 @@
                 reader.readAsText(document.getElementById("inventory_json").files[0]);
             }
             
-            //this function gets called when reader is done loading since it is an asynchronus method
+            //this function gets called when reader is done loading since it is an asynchronus method. this is where all of the calculations will be done using the newly created 'Inventory' Object
             function calculate (event){
                 str = event.target.result;
                 Inventory = JSON.parse(str);
-                console.log(Inventory)
+                console.log(Inventory);
                 
-                //Nick, continue YOUR CODE HERE
-                    //This is were you will eventually make call to get_price
-            }
-            
-            //example call -> get_price( object.rgDescription.##########.market_hash_name) ----> returns median price on market
-            function get_price(hash_name){
-                
-                //Example Link:  http://steamcommunity.com/market/priceoverview/?currency=1&appid=730&market_hash_name=StatTrak%E2%84%A2%20P250%20%7C%20Steel%20Disruption%20%28Factory%20New%29
-                
-                encoded_market_hash = encodeURI(hash_name);
-                
-                link = "http://steamcommunity.com/market/priceoverview/?currency=1&appid=730&market_hash_name=" + encoded_market_hash
-                console.log(link);
-                
-                median_price = 0
-                
-                return loadJSON(link, price_check,'jsonp')
-                
-            }
-            
-            function loadJSON(path, success, error) {
-              var xhr = new XMLHttpRequest();
-              xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                  if (xhr.status === 200) {
-                    return success(JSON.parse(xhr.responseText));
-                  }
-                  else {
-                    
-                  }
+                //NICK CODE GO HERE, BELOW IS EXAMPLE OF SETTING SCORE AND INSERTING IT INTO THE TEXT THAT THE SHARE BUTTON WILL POSTa
+                //Inventory.rgDescriptions["2316436747_188530139"].(subclasses);
+              //Inventory.rgDescriptions[items[#]].(subclasses);
+                var items = Object.keys(Inventory.descriptions);
+                var best = {
+                    0:{ name: "", value: 0, wear: 0},
+                    1:{ name: "", value: 0, wear: 0},
+                    2:{name: "", value: 0, wear: 0},
+                    3:{name: "", value: 0, wear: 0},
+                    4:{name: "", value: 0, wear: 0}}
+                ;
+                score = 0
+               for(let n =0; n<items.length; n++){
+                if(Inventory.descriptions[items[n]].tags[0].localized_tag_name == "Graffiti"){
+                    switch(Inventory.descriptions[items[n]].tags[2].localized_tag_name){
+                        case "Exotic":{
+                            score += 10;
+                            break;
+                        }
+                        case "Remarkable":{
+                            score += 6;
+                            break;
+                        }
+                        case "High Grade":{
+                            score +=2;
+                            break;
+                        }
+                        case "Base Grade":{
+                            score +=1;
+                            break;
+                        }
+                        default: break;
+                    }
                 }
-              };
-              xhr.open('GET', path, true);
-              xhr.send();
+               
             }
-            
-            function price_check(Data){
+            let Skins = [];
+            for(let n = 0; n<items.length; n++){
+                if(Inventory.descriptions[items[n]].tags[1].category == "Weapon"){
+                    Skins.push(items[n]);
+                }
+            }console.log(Skins);
+            for(let n = 0; n<Skins.length; n++){
+               iscore = score; 
+                if(Inventory.descriptions[Skins[n]].tags[0].localized_tag_name == "Knife"){
+                    score += 300;
+                    what(Skins[n], 8, Weartype(n));
+                    console.log(Skins[n], score-iscore);
+                }else{
+                    switch(Inventory.descriptions[Skins[n]].tags[4].localized_tag_name){
+                        case "Extraordinary":{
+                            score +=1000;
+                            what(Skins[n], 8, Weartype(n));
+                            break;
+                        }
+                        case "Contraband": {
+                            score +=500;
+                            what(Skins[n], 7, Weartype(n));
+                            break;
+                        }
+                        case "Covert":{
+                            score += 100;
+                            what(Skins[n], 6, Weartype(n));
+                            break;
+                            console.log(Skins[n], "Is Covert!")
+                        }
+                        case "Classified":{
+                            score += 50;
+                            what(Skins[n], 5, Weartype(n));
+                            break;
+                        }
+                        case "Restricted":{
+                            score += 25;
+                            what(Skins[n], 4, Weartype(n));
+                            break;
+                        }
+                        case "Mil-Spec Grade":{
+                            score += 10;
+                            what(Skins[n], 3, Weartype(n));
+                            break;
+                        }
+                        case "Industrial Grade":{
+                            score += 5;
+                            what(Skins[n], 2, Weartype(n));
+                            break;
+                        }
+                        case "Consumer Grade":{
+                            score +=1;
+                            what(Skins[n], 1, Weartype(n));
+                            break;
+                        }
+                        default:
+                            //score +=1;
+                            what(Skins[n], 0, Weartype(n))
+                            break;
+                    }console.log(Skins[n], score-iscore);
+                }
+            }
 
-              median_price = Data.median_price;
-                console.log(median_price);
-                return median_price
+            function Weartype(n){
+                   
+                if(Inventory.descriptions[Skins[n]].tags[0].localized_tag_name == "Knife"){
+                    switch(Inventory.descriptions[Skins[n]].tags[4].localized_tag_name)
+                            {
+                            case "Factory New":{
+                                score +=10;
+                                return(5);
+                                break;
+                            }
+                            case "Minimal Wear":{
+                                score += 8;
+                                return(4);
+                                break;
+                            }
+                            case "Field-Tested":{
+                                score +=6;
+                                return(3);
+                                break;
+                            }
+                            case "Well-Worn":{
+                                score += 4;
+                                return(2);
+                                break;
+                            }
+                            case "Battle-Scarred":{
+                                score +=2;
+                                return(1);
+                                break;
+                            }
+                            default:
+                                score +=1;
+                                return(0)
+                                break;
+                            }
+                } else{
+                    switch(Inventory.descriptions[Skins[n]].tags[5].localized_tag_name)
+                            {
+                            case "Factory New":{
+                                score +=10;
+                                return(5);
+                                break;
+                            }
+                            case "Minimal Wear":{
+                                score += 8;
+                                return(4);
+                                break;
+                            }
+                            case "Field-Tested":{
+                                score +=6;
+                                return(3);
+                                break;
+                            }
+                            case "Well-Worn":{
+                                score += 4;
+                                return(2);
+                                break;
+                            }
+                            case "Battle-Scarred":{
+                                score +=2;
+                                return(1);
+                                break;
+                            }
+                            default:
+                                score +=1;
+                                return(0)
+                                break;
+                            }
+                }
             }
-            
+    function what(skin, v, w){
+        let b = false;
+        for (x in best){
+        if(v >= best[x].value && w >= best[x].wear) {
+            best[x].name = Inventory.descriptions[skin].market_name;
+            best[x].value = v;
+            best[x].wear = w;
+            b = true;
+        }
+        else if(v == best[x].value && w >= best[x].wear){
+            best[x].name = Inventory.descriptions[skin].market_name;
+            best[x].value = v;
+            best[x].wear = w;
+            b = true;
+        }
+        if(b){
+            break;
+        }
+        }
+    }
+                
+                document.getElementById("score").innerHTML = score;
+                
+                share_string = "My%20CS%3AGO%20inventory%20has%20a%20score%20of%20" + score + ".%20Compare%20yours%20at%20the%20link!"
+                
+                //https://twitter.com/intent/tweet/?text=My%20CS%3AGO%20inventory%20has%20a%20score%20of%20999.%20Compare%20yours%20at%20the%20link!&amp;url=https%3A%2F%2Fwww.csgoinventoryrater.com%2F
+                document.getElementById("twitter_a").href = "https://twitter.com/intent/tweet/?text=" + share_string + "&amp;url=https%3A%2F%2Fwww.csgoinventoryrater.com%2F";
+                console.log("twitter url: ",document.getElementById("twitter_a").href);
+                //http://www.reddit.com/submit?url=https://www.csgoinventoryrater.com/&title=Post%20to%20Reddit%20via%20URL
+                document.getElementById("reddit_a").href = "http://www.reddit.com/submit?url=https://www.csgoinventoryrater.com/&title=" + share_string;
+                console.log("reddit url: ", document.getElementById("reddit_a").href);
+                text = "";
+            for (let y in best){
+            text +="<li>"+best[y].name +"</li>";
+           }
+           document.getElementById("top_skins_list").innerHTML = text;
+        }
         </script>
     </div>
     
     <!-- this div will be hidden and needs to be revealed with JS -->
     <div id=score_display>
         <p>Your Inventory Score Is:</p>
-        <h2 id="score">999</h2>
+        <h2 id="score"></h2>
     </div>
     
     <div id="list_of_skins" class="boxed">
@@ -111,9 +274,23 @@
         </ol>
     </div>
     
+    <!-- contents within 'div id = share' from https://sharingbuttons.io/ The MIT License (MIT) Copyright (c) 2015 Maximilian Stoiber -->
     <div id="share">
-        <h2>Share</h2>
-    </div>
+        <!-- Share button Twitter -->
+        <a class="resp-sharing-button__link" id="twitter_a" href="https://twitter.com/intent/tweet/?text=&amp;url=https%3A%2F%2Fwww.csgoinventoryrater.com%2F" target="_blank" rel="noopener" aria-label="Share on Twitter">
+          <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--large"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solidcircle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C5.38 0 0 5.38 0 12s5.38 12 12 12 12-5.38 12-12S18.62 0 12 0zm5.26 9.38v.34c0 3.48-2.64 7.5-7.48 7.5-1.48 0-2.87-.44-4.03-1.2 1.37.17 2.77-.2 3.9-1.08-1.16-.02-2.13-.78-2.46-1.83.38.1.8.07 1.17-.03-1.2-.24-2.1-1.3-2.1-2.58v-.05c.35.2.75.32 1.18.33-.7-.47-1.17-1.28-1.17-2.2 0-.47.13-.92.36-1.3C7.94 8.85 9.88 9.9 12.06 10c-.04-.2-.06-.4-.06-.6 0-1.46 1.18-2.63 2.63-2.63.76 0 1.44.3 1.92.82.6-.12 1.95-.27 1.95-.27-.35.53-.72 1.66-1.24 2.04z"/></svg>
+            </div>Share on Twitter</div>
+        </a>
+
+        <!-- Share button Reddit -->
+        <a class="resp-sharing-button__link" id="reddit_a" href="https://reddit.com/submit/?url=https%3A%2F%2Fwww.csgoinventoryrater.com%2F&amp;resubmit=true&amp;title=" target="_blank" rel="noopener" aria-label="Share on Reddit">
+          <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--large"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solidcircle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="9.391" cy="13.392" r=".978"/><path d="M14.057 15.814c-1.14.66-2.987.655-4.122-.004-.238-.138-.545-.058-.684.182-.13.24-.05.545.19.685.72.417 1.63.646 2.568.646.93 0 1.84-.228 2.558-.642.24-.13.32-.44.185-.68-.14-.24-.445-.32-.683-.18zM5 12.086c0 .41.23.78.568.978.27-.662.735-1.264 1.353-1.774-.2-.207-.48-.334-.79-.334-.62 0-1.13.507-1.13 1.13z"/><path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0zm6.673 14.055c.01.104.022.208.022.314 0 2.61-3.004 4.73-6.695 4.73s-6.695-2.126-6.695-4.74c0-.105.013-.21.022-.313C4.537 13.73 4 12.97 4 12.08c0-1.173.956-2.13 2.13-2.13.63 0 1.218.29 1.618.757 1.04-.607 2.345-.99 3.77-1.063.057-.803.308-2.33 1.388-2.95.633-.366 1.417-.323 2.322.085.302-.81 1.076-1.397 1.99-1.397 1.174 0 2.13.96 2.13 2.13 0 1.177-.956 2.133-2.13 2.133-1.065 0-1.942-.79-2.098-1.81-.734-.4-1.315-.506-1.716-.276-.6.346-.818 1.395-.88 2.087 1.407.08 2.697.46 3.728 1.065.4-.468.987-.756 1.617-.756 1.17 0 2.13.953 2.13 2.13 0 .89-.54 1.65-1.33 1.97z"/><circle cx="14.609" cy="13.391" r=".978"/><path d="M17.87 10.956c-.302 0-.583.128-.79.334.616.51 1.082 1.112 1.352 1.774.34-.197.568-.566.568-.978 0-.623-.507-1.13-1.13-1.13z"/></svg>
+            </div>Share on Reddit</div>
+        </a>
+
+    </div><!-- END MIT LISCENSE MATERIAL-->
     
 </body>  
 </HTML>
