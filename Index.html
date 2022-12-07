@@ -50,7 +50,8 @@
                 //NICK CODE GO HERE, BELOW IS EXAMPLE OF SETTING SCORE AND INSERTING IT INTO THE TEXT THAT THE SHARE BUTTON WILL POSTa
                 //Inventory.rgDescriptions["2316436747_188530139"].(subclasses);
               //Inventory.rgDescriptions[items[#]].(subclasses);
-                var items = Object.keys(Inventory.rgDescriptions)
+                var items = Object.keys(Inventory.rgDescriptions);
+                var best = {0:{ name: "", value: 0, wear: 0}, 1:{ name: "", value: 0, wear: 0}, 2:{name: "", value: 0, wear: 0}, 3:{name: "", value: 0, wear: 0}, 4:{name: "", value: 0, wear: 0}};
                 score = 0
                for(let n =0; n<items.length; n++){
                 if(Inventory.rgDescriptions[items[n]].tags[0].name == "Graffiti"){
@@ -117,33 +118,57 @@
                 break;
             }
         }
+                  }
+
+function Weartype(rare, n){
                     switch(Inventory.rgDescriptions[Skins[n]].tags[5].name)
                     {
                     case "Factory New":{
                         score +=10;
+                        what(Skins[n], rare, 5);
                         break;
                     }
                     case "Minimal Wear":{
                         score += 8;
+                        what(Skins[n], rare, 4);
                         break;
                     }
                     case "Field-Tested":{
                         score +=6;
+                        what(Skins[n], rare, 3);
                         break;
                     }
                     case "Well-Worn":{
                         score += 4;
+                        what(Skins[n], rare, 2);
                         break;
                     }
                     case "Battle-Scarred":{
                         score +=2;
+                        what(Skins[n], rare, 1);
                         break;
                     }
                     default:
                         score +=1;
                         break;
                     }
+                }
+    function what(skin, v, w){
+        let b = false;
+        if (best.length > 0 && best.length <=5){
+        for (let x = 0; x<best.length; x++){
+        if(v >= best[x].value && w >= best[x.wear]) {
+            best[x].name = Inventory.rgDescriptions[skin].name;
+            best[x].value = v;
+            best[x].wear = w;
+            b = true;
+        }
+        if(b){
+            break;
+        }
+        }
     }
+}
                 
                     document.getElementById("score").innerHTML = score;
                 
@@ -156,6 +181,10 @@
                 //http://www.reddit.com/submit?url=https://www.csgoinventoryrater.com/&title=Post%20to%20Reddit%20via%20URL
                 document.getElementById("reddit_a").href = "http://www.reddit.com/submit?url=https://www.csgoinventoryrater.com/&title=" + share_string;
                 console.log("reddid url: ", document.getElementById("reddit_a").href);
+                 for (let y in best){
+            text +="<li>"+best[y].name +"</li>";
+           }
+           document.getElementById("list_of_skins").innerHTML = text;
             }
             
         </script>
