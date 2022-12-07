@@ -20,7 +20,7 @@
          <script>
             function insert_link() {
             let id = document.getElementById("steam_id").value;
-            window.open("https://steamcommunity.com/profiles/"+id+"/inventory/json/730/2", "_blank");
+            window.open("https://steamcommunity.com/inventory/"+id+"/730/2?l=english&count=5000", "_blank");
             }
         </script>
         
@@ -50,12 +50,12 @@
                 //NICK CODE GO HERE, BELOW IS EXAMPLE OF SETTING SCORE AND INSERTING IT INTO THE TEXT THAT THE SHARE BUTTON WILL POSTa
                 //Inventory.rgDescriptions["2316436747_188530139"].(subclasses);
               //Inventory.rgDescriptions[items[#]].(subclasses);
-                var items = Object.keys(Inventory.rgDescriptions);
+                var items = Object.keys(Inventory.descriptions);
                 var best = {0:{ name: "", value: 0, wear: 0}, 1:{ name: "", value: 0, wear: 0}, 2:{name: "", value: 0, wear: 0}, 3:{name: "", value: 0, wear: 0}, 4:{name: "", value: 0, wear: 0}};
                 score = 0
                for(let n =0; n<items.length; n++){
-                if(Inventory.rgDescriptions[items[n]].tags[0].name == "Graffiti"){
-                    switch(Inventory.rgDescriptions[items[n]].tags[2].name){
+                if(Inventory.descriptions[items[n]].tags[0].localized_tag_name == "Graffiti"){
+                    switch(Inventory.descriptions[items[n]].tags[2].localized_tag_name){
                         case "Exotic":{
                             score += 10;
                             break;
@@ -79,86 +79,104 @@
             }
             let Skins = [];
     for(let n = 0; n<items.length; n++){
-        if(Inventory.rgDescriptions[items[n]].tags.length==6){
+        if(Inventory.descriptions[items[n]].tags.length==6){
             Skins.push(items[n]);
         }
     }
     for(let n = 0; n<Skins.length; n++){
-         switch(Inventory.rgDescriptions[Skins[n]].tags[4].name){
+        switch(Inventory.descriptions[Skins[n]].tags[4].localized_tag_name){
             case "Extraordinary":{
                 score +=1000;
+                what(Skins[n], 8, Weartype(n));
                 break;
             }
             case "Contraband": {
                 score +=500;
+                what(Skins[n], 7, Weartype(n));
                 break;
             }
             case "Covert":{
                 score += 100;
+                what(Skins[n], 6, Weartype(n));
                 break;
             }
             case "Classified":{
                 score += 50;
+                what(Skins[n], 5, Weartype(n));
                 break;
             }
             case "Restricted":{
                 score += 25;
+                what(Skins[n], 4, Weartype(n));
                 break;
             }
-            case "Mil-Spec":{
+            case "Mil-Spec Grade":{
                 score += 10;
+                what(Skins[n], 3, Weartype(n));
                 break;
             }
             case "Industrial Grade":{
                 score += 5;
+                what(Skins[n], 2, Weartype(n));
                 break;
             }
             case "Consumer Grade":{
                 score +=1;
+                what(Skins[n], 1, Weartype(n));
                 break;
             }
+            default:
+                //score +=1;
+                what(Skins[n], 0, Weartype(n))
+                break;
         }
-                  }
+    }
 
-function Weartype(rare, n){
-                    switch(Inventory.rgDescriptions[Skins[n]].tags[5].name)
+function Weartype(n){
+                    switch(Inventory.descriptions[Skins[n]].tags[5].name)
                     {
                     case "Factory New":{
                         score +=10;
-                        what(Skins[n], rare, 5);
+                        return(5);
                         break;
                     }
                     case "Minimal Wear":{
                         score += 8;
-                        what(Skins[n], rare, 4);
+                        return(4);
                         break;
                     }
                     case "Field-Tested":{
                         score +=6;
-                        what(Skins[n], rare, 3);
+                        return(3);
                         break;
                     }
                     case "Well-Worn":{
                         score += 4;
-                        what(Skins[n], rare, 2);
+                        return(2);
                         break;
                     }
                     case "Battle-Scarred":{
                         score +=2;
-                        what(Skins[n], rare, 1);
+                        return(1);
                         break;
                     }
                     default:
                         score +=1;
+                        return(0)
                         break;
                     }
                 }
     function what(skin, v, w){
         let b = false;
-        if (best.length > 0 && best.length <=5){
-        for (let x = 0; x<best.length; x++){
-        if(v >= best[x].value && w >= best[x.wear]) {
-            best[x].name = Inventory.rgDescriptions[skin].name;
+        for (x in best){
+        if(v >= best[x].value && w >= best[x].wear) {
+            best[x].name = Inventory.descriptions[skin].market_name;
+            best[x].value = v;
+            best[x].wear = w;
+            b = true;
+        }
+        else if(v == best[x].value && w >= best[x].wear){
+            best[x].name = Inventory.descriptions[skin].market_name;
             best[x].value = v;
             best[x].wear = w;
             b = true;
@@ -168,11 +186,8 @@ function Weartype(rare, n){
         }
         }
     }
-}
-                
                     document.getElementById("score").innerHTML = score;
                 
-               
                 share_string = "My%20CS%3AGO%20inventory%20has%20a%20score%20of%20" + score + ".%20Compare%20yours%20at%20the%20link!"
                 
                 //https://twitter.com/intent/tweet/?text=My%20CS%3AGO%20inventory%20has%20a%20score%20of%20999.%20Compare%20yours%20at%20the%20link!&amp;url=https%3A%2F%2Fwww.csgoinventoryrater.com%2F
@@ -180,13 +195,13 @@ function Weartype(rare, n){
                 console.log("twitter url: ",document.getElementById("twitter_a").href);
                 //http://www.reddit.com/submit?url=https://www.csgoinventoryrater.com/&title=Post%20to%20Reddit%20via%20URL
                 document.getElementById("reddit_a").href = "http://www.reddit.com/submit?url=https://www.csgoinventoryrater.com/&title=" + share_string;
-                console.log("reddid url: ", document.getElementById("reddit_a").href);
-                 for (let y in best){
+                console.log("reddit url: ", document.getElementById("reddit_a").href);
+                text = "";
+            for (let y in best){
             text +="<li>"+best[y].name +"</li>";
            }
-           document.getElementById("list_of_skins").innerHTML = text;
-            }
-            
+           document.getElementById("top_skins_list").innerHTML = text;
+        }
         </script>
     </div>
     
