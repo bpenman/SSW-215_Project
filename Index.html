@@ -79,6 +79,7 @@
                         }
                         default: break;
                     }
+                    console.log("Yes this is referenced")
                 }
                
             }
@@ -93,14 +94,14 @@
                iscore = score; 
                 if(Inventory.descriptions[Skins[n]].tags[0].localized_tag_name == "Knife"){
                     score += 300;
-                    what(Skins[n], 8, Weartype(n, 4));
+                    Weartype(n, 4);
                     S.name = Inventory.descriptions[Skins[n]].market_name; 
                     S.points = score-iscore;
                     skin_points.push(S);
                 }
                 if(Inventory.descriptions[Skins[n]].tags[0].localized_tag_name == "Gloves"){
                     score += 400;
-                    what(Skins[n], 8, Weartype(n, 4));
+                     8, Weartype(n, 4);
                     S.name = Inventory.descriptions[Skins[n]].market_name; 
                     S.points = score-iscore;
                     skin_points.push(S);
@@ -109,7 +110,7 @@
                     switch(Inventory.descriptions[Skins[n]].tags[4].localized_tag_name){
                         case "Extraordinary":{
                             score +=1000;
-                            what(Skins[n], 8, Weartype(n, 5));
+                            Weartype(n, 5);
                             break;
                         }
                         case "Contraband": {
@@ -164,32 +165,26 @@
                             {
                             case "Factory New":{
                                 score +=10;
-                                return(5);
                                 break;
                             }
                             case "Minimal Wear":{
                                 score += 8;
-                                return(4);
                                 break;
                             }
                             case "Field-Tested":{
                                 score +=6;
-                                return(3);
                                 break;
                             }
                             case "Well-Worn":{
                                 score += 4;
-                                return(2);
                                 break;
                             }
                             case "Battle-Scarred":{
                                 score +=2;
-                                return(1);
                                 break;
                             }
                             default:
                                 score +=1;
-                                return(0)
                                 break;
                             }
                 } 
