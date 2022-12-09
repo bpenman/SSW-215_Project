@@ -48,11 +48,16 @@
                 console.log(Inventory);
                 
                 //NICK CODE GO HERE, BELOW IS EXAMPLE OF SETTING SCORE AND INSERTING IT INTO THE TEXT THAT THE SHARE BUTTON WILL POSTa
-                //Inventory.rgDescriptions["2316436747_188530139"].(subclasses);
-              //Inventory.rgDescriptions[items[#]].(subclasses);
                 var items = Object.keys(Inventory.descriptions);
-                var best = {0:{ name: "", value: 0, wear: 0}, 1:{ name: "", value: 0, wear: 0}, 2:{name: "", value: 0, wear: 0}, 3:{name: "", value: 0, wear: 0}, 4:{name: "", value: 0, wear: 0}};
-                score = 0
+                var best = {
+                    0:{name: "", value: 0, wear: 0},
+                    1:{name: "", value: 0, wear: 0},
+                    2:{name: "", value: 0, wear: 0},
+                    3:{name: "", value: 0, wear: 0},
+                    4:{name: "", value: 0, wear: 0}}
+                ;
+                score = 0;
+                let skin_points = [];
                for(let n =0; n<items.length; n++){
                 if(Inventory.descriptions[items[n]].tags[0].localized_tag_name == "Graffiti"){
                     switch(Inventory.descriptions[items[n]].tags[2].localized_tag_name){
@@ -78,115 +83,123 @@
                
             }
             let Skins = [];
-    for(let n = 0; n<items.length; n++){
-        if(Inventory.descriptions[items[n]].tags.length==6){
-            Skins.push(items[n]);
-        }
-    }
-    for(let n = 0; n<Skins.length; n++){
-        switch(Inventory.descriptions[Skins[n]].tags[4].localized_tag_name){
-            case "Extraordinary":{
-                score +=1000;
-                what(Skins[n], 8, Weartype(n));
-                break;
-            }
-            case "Contraband": {
-                score +=500;
-                what(Skins[n], 7, Weartype(n));
-                break;
-            }
-            case "Covert":{
-                score += 100;
-                what(Skins[n], 6, Weartype(n));
-                break;
-            }
-            case "Classified":{
-                score += 50;
-                what(Skins[n], 5, Weartype(n));
-                break;
-            }
-            case "Restricted":{
-                score += 25;
-                what(Skins[n], 4, Weartype(n));
-                break;
-            }
-            case "Mil-Spec Grade":{
-                score += 10;
-                what(Skins[n], 3, Weartype(n));
-                break;
-            }
-            case "Industrial Grade":{
-                score += 5;
-                what(Skins[n], 2, Weartype(n));
-                break;
-            }
-            case "Consumer Grade":{
-                score +=1;
-                what(Skins[n], 1, Weartype(n));
-                break;
-            }
-            default:
-                //score +=1;
-                what(Skins[n], 0, Weartype(n))
-                break;
-        }
-    }
-
-function Weartype(n){
-                    switch(Inventory.descriptions[Skins[n]].tags[5].localized_tag_name)
-                    {
-                    case "Factory New":{
-                        score +=10;
-                        return(5);
-                        break;
-                    }
-                    case "Minimal Wear":{
-                        score += 8;
-                        return(4);
-                        break;
-                    }
-                    case "Field-Tested":{
-                        score +=6;
-                        return(3);
-                        break;
-                    }
-                    case "Well-Worn":{
-                        score += 4;
-                        return(2);
-                        break;
-                    }
-                    case "Battle-Scarred":{
-                        score +=2;
-                        return(1);
-                        break;
-                    }
-                    default:
-                        score +=1;
-                        return(0)
-                        break;
-                    }
+            for(let n = 0; n<items.length; n++){
+                if(Inventory.descriptions[items[n]].tags[1].category == "Weapon"){
+                    Skins.push(items[n]);
                 }
-    function what(skin, v, w){
-        let b = false;
-        for (x in best){
-        if(v >= best[x].value && w >= best[x].wear) {
-            best[x].name = Inventory.descriptions[skin].market_name;
-            best[x].value = v;
-            best[x].wear = w;
-            b = true;
-        }
-        else if(v == best[x].value && w >= best[x].wear){
-            best[x].name = Inventory.descriptions[skin].market_name;
-            best[x].value = v;
-            best[x].wear = w;
-            b = true;
-        }
-        if(b){
-            break;
-        }
-        }
-    }
-                    document.getElementById("score").innerHTML = score;
+            }console.log(Skins);
+            for(let n = 0; n<Skins.length; n++){
+                let S = {};
+               iscore = score; 
+                if(Inventory.descriptions[Skins[n]].tags[0].localized_tag_name == "Knife"){
+                    score += 300;
+                    what(Skins[n], 8, Weartype(n, 4));
+                    S.name = Inventory.descriptions[Skins[n]].market_name; 
+                    S.points = score-iscore;
+                    skin_points.push(S);
+                }
+                if(Inventory.descriptions[Skins[n]].tags[0].localized_tag_name == "Gloves"){
+                    score += 400;
+                    what(Skins[n], 8, Weartype(n, 4));
+                    S.name = Inventory.descriptions[Skins[n]].market_name; 
+                    S.points = score-iscore;
+                    skin_points.push(S);
+                }
+                else{
+                    switch(Inventory.descriptions[Skins[n]].tags[4].localized_tag_name){
+                        case "Extraordinary":{
+                            score +=1000;
+                            what(Skins[n], 8, Weartype(n, 5));
+                            break;
+                        }
+                        case "Contraband": {
+                            score +=500;
+                            Weartype(n, 5);
+                            break;
+                        }
+                        case "Covert":{
+                            score += 100;
+                            Weartype(n, 5);
+                            break;
+                            console.log(Skins[n], "Is Covert!")
+                        }
+                        case "Classified":{
+                            score += 50;
+                            Weartype(n, 5);
+                            break;
+                        }
+                        case "Restricted":{
+                            score += 25;
+                            Weartype(n, 5);
+                            break;
+                        }
+                        case "Mil-Spec Grade":{
+                            score += 10;
+                            Weartype(n, 5);
+                            break;
+                        }
+                        case "Industrial Grade":{
+                            score += 5;
+                            Weartype(n, 5);
+                            break;
+                        }
+                        case "Consumer Grade":{
+                            score +=1;
+                            Weartype(n, 5);
+                            break;
+                        }
+                        default:
+                           Weartype(n, 5);
+                             break;
+                    }
+                    S.name = Inventory.descriptions[Skins[n]].market_name; 
+                    S.points = score-iscore;
+                    skin_points.push(S);
+                }
+            }
+            console.log(skin_points);
+            function Weartype(n, t){
+                   
+                    switch(Inventory.descriptions[Skins[n]].tags[t].localized_tag_name)
+                            {
+                            case "Factory New":{
+                                score +=10;
+                                return(5);
+                                break;
+                            }
+                            case "Minimal Wear":{
+                                score += 8;
+                                return(4);
+                                break;
+                            }
+                            case "Field-Tested":{
+                                score +=6;
+                                return(3);
+                                break;
+                            }
+                            case "Well-Worn":{
+                                score += 4;
+                                return(2);
+                                break;
+                            }
+                            case "Battle-Scarred":{
+                                score +=2;
+                                return(1);
+                                break;
+                            }
+                            default:
+                                score +=1;
+                                return(0)
+                                break;
+                            }
+                } 
+                    
+  
+  
+         skin_points.sort(function(a, b){return a.points - b.points;}); 
+         console.table(skin_points); 
+         console.log(skin_points[skin_points.length-1].name);   
+                document.getElementById("score").innerHTML = score;
                 
                 share_string = "My%20CS%3AGO%20inventory%20has%20a%20score%20of%20" + score + ".%20Compare%20yours%20at%20the%20link!"
                 
@@ -197,23 +210,20 @@ function Weartype(n){
                 document.getElementById("reddit_a").href = "http://www.reddit.com/submit?url=https://www.csgoinventoryrater.com/&title=" + share_string;
                 console.log("reddit url: ", document.getElementById("reddit_a").href);
                 text = "";
-            for (let y in best){
-            text +="<li>"+best[y].name +"</li>";
-           }
+            text +="<li>"+skin_points[skin_points.length-1].name +"</li>"+ "<li>"+skin_points[skin_points.length-2].name +"</li>"+"<li>"+skin_points[skin_points.length-3].name +"</li>";
+            text += "<li>"+skin_points[skin_points.length-4].name +"</li>"+"<li>"+skin_points[skin_points.length-5].name +"</li>";
            document.getElementById("top_skins_list").innerHTML = text;
-           document.getElementById("list_of_skins").style.display = 'block';
-           document.getElementById("score_display").style.display = 'block';
         }
         </script>
     </div>
     
     <!-- this div will be hidden and needs to be revealed with JS -->
-    <div id=score_display style= "display:none">
+    <div id=score_display>
         <p>Your Inventory Score Is:</p>
         <h2 id="score"></h2>
     </div>
     
-    <div id="list_of_skins" class="boxed" style= "display:none">
+    <div id="list_of_skins" class="boxed">
         <h3>Your Top Skins:</h3>
         <!-- This list needs to be populated by JS and by default this div is invisible until it is populated, so JS has to be made to reveal it -->
         <ol id="top_skins_list">
