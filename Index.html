@@ -97,6 +97,7 @@
                     S.name = Inventory.descriptions[Skins[n]].market_name; 
                     S.points = score-iscore;
                     skin_points.push(S);
+                    console.log(Inventory.descriptions[Skins[n]].market_name, score-iscore);
                 }
                 if(Inventory.descriptions[Skins[n]].tags[0].localized_tag_name == "Gloves"){
                     score += 400;
@@ -104,6 +105,7 @@
                     S.name = Inventory.descriptions[Skins[n]].market_name; 
                     S.points = score-iscore;
                     skin_points.push(S);
+                    console.log(Inventory.descriptions[Skins[n]].market_name, score-iscore);
                 }
                 else{
                     switch(Inventory.descriptions[Skins[n]].tags[4].localized_tag_name){
@@ -121,7 +123,6 @@
                             score += 100;
                             Weartype(n, 5);
                             break;
-                            console.log(Skins[n], "Is Covert!")
                         }
                         case "Classified":{
                             score += 50;
@@ -149,17 +150,18 @@
                             break;
                         }
                         default:
-                           Weartype(n, 5);
+                           //Weartype(n, 5);
+                           score +=1;
                              break;
                     }
                     S.name = Inventory.descriptions[Skins[n]].market_name; 
                     S.points = score-iscore;
                     skin_points.push(S);
+                    console.log(Inventory.descriptions[Skins[n]].market_name, score-iscore);
                 }
             }
             console.log(skin_points);
-            function Weartype(n, t){
-                   
+            function Weartype(n, t){   
                     switch(Inventory.descriptions[Skins[n]].tags[t].localized_tag_name)
                             {
                             case "Factory New":{
@@ -192,7 +194,6 @@
   
          skin_points.sort(function(a, b){return a.points - b.points;}); 
          console.table(skin_points); 
-         console.log(skin_points[skin_points.length-1].name);   
                 document.getElementById("score").innerHTML = score;
                 
                 share_string = "My%20CS%3AGO%20inventory%20has%20a%20score%20of%20" + score + ".%20Compare%20yours%20at%20the%20link!"
