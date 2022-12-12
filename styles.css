@@ -317,3 +317,9 @@ background-color: #FF6600
     padding-top: 1em;
     padding-bottom: 1em;
 }
+
+#score{
+    font-size:32pt;
+    font-weight: bold;
+    box-shadow: 2px 2px 0px #27272B, -20px -10px 50px #263142 inset;
+}
