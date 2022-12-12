@@ -208,20 +208,22 @@
             text +="<li>"+skin_points[skin_points.length-1].name +"</li>"+ "<li>"+skin_points[skin_points.length-2].name +"</li>"+"<li>"+skin_points[skin_points.length-3].name +"</li>";
             text += "<li>"+skin_points[skin_points.length-4].name +"</li>"+"<li>"+skin_points[skin_points.length-5].name +"</li>";
            document.getElementById("top_skins_list").innerHTML = text;
+           document.getElementById("list_of_skins").style.display = 'block';
+           document.getElementById("score_display").style.display = 'block';
         }
         </script>
     </div>
     
     <!-- this div will be hidden and needs to be revealed with JS -->
-    <div id=score_display>
+    <div id=score_display style= "display:none">
         <p>Your Inventory Score Is:</p>
         <h2 id="score"></h2>
     </div>
     
-    <div id="list_of_skins" class="boxed">
+    <div id="list_of_skins" class="boxed" style= "display:none">
         <h3>Your Top Skins:</h3>
         <!-- This list needs to be populated by JS and by default this div is invisible until it is populated, so JS has to be made to reveal it -->
-        <ol id="top_skins_list">
+        <ol id="top_skins_list" >
             <li></li>
             <li></li>
             <li></li>
