@@ -4,7 +4,7 @@ body{
     background-color: #263142;
     color: #8CFF9F;
     font-family: Verdana, sans-serif;
-    width:85%;
+    width:95%;
     margin-left:auto;
     margin-right:auto;
 }
@@ -161,7 +161,7 @@ li{
 .resp-sharing-button {
   border-radius: 5px;
   transition: 25ms ease-out;
-  padding: 0.5em 0.75em;
+  padding: 1em 1em;
   font-family: Helvetica Neue,Helvetica,Arial,sans-serif
 }
 
@@ -321,4 +321,44 @@ background-color: #FF6600
 #score{
     font-size:72pt;
     font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+    
+    .boxed{
+        width:100%;
+        display:block;
+        margin:0;
+    }
+    
+    #input_field{
+        width:100%;
+        display:block;
+        margin:0;
+        margin-left:auto;
+        margin-right:auto;
+        padding:0;
+        padding-top:1em;
+        padding-bottom:1em;
+    }
+    
+    #list_of_skins{
+        width:100%;
+        display:block;
+        margin:0;
+        padding:0;
+    }
+    
+    #share{
+        display:block;
+        float:left;
+        margin-left:auto;
+        margin-right:auto;
+        width: 100%;
+    }
+    
+    #inventory_json{
+        font-size:14pt;
+    }
+    
 }
